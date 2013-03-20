@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<div id="header">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="navbar">
+                <a class="brand" href="/">DNA</a>
+            </div>
+        </div>
+        <div class="span10">
+            <div class="navbar pull-right">
+                <ul class="nav">
+                {% if request.user.is_authenticated %}
+                    <li><a>{% trans "Welcome," %}{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a></li>
+                {% endif %}
+                
+                {% if request.user.is_staff %}
+                    <li><a href="/admin/">{% trans "Admin" %}</a></li>
+                {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

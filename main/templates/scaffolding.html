@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load pages_tags mezzanine_tags i18n future %}
+<html>
+<head>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+
+{% compress css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/all.css">
+
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+{% compress js %}
+<script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script>
+$(function() {
+    $('.middleinput:text, textarea').addClass('xlarge');
+    $('.control-group label').addClass('control-label');
+});
+</script>
+{% block extra_js %}{% endblock %}
+{% endcompress %}
+<!--[if lt IE 9]>
+<script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+
+</head>
+<body id="{% block body_id %}body{% endblock %}">
+
+{% include "includes/header.html" %}
+<div class="container">
+    {% nevercache %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" data-alert="alert">
+    <a class="close" href="#" onclick="$(this).parent().fadeOut('fast'); return false;">×</a>{{ message }}
+    </div>
+    {% endfor %}
+    {% endnevercache %}
+    
+    <div class="row">
+        <div class="span3 left">
+            <div id="left-panel" class="panel">
+            {% block left_panel %}
+            {% endblock %}
+            </div>
+        </div>
+        <div class="span6 middle">
+            {% block main %}{% endblock %}
+        </div>
+        <div class="span3 right">
+            <div class="panel">
+                {% block right_panel %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">{% include "includes/footer.html" %}</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+*.log
+*.pot
+*.pyc
+*.pyo
+*.log
+
+.DS_Store
+static/
+media/
+!*/static
