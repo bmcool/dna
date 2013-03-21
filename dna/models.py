@@ -19,6 +19,11 @@ class Movie(models.Model):
     name = models.CharField(_('Name'), max_length=50)
     year = models.IntegerField(_('Year'))
     
+    def set_evaluation(self, user, evaluation):
+        instance, new = Evaluation.objects.get_or_create(movie=self, user=user, evaluation=evaluation)
+        instance.evaluation = evaluation
+        instance.save()
+    
     def __unicode__(self):
         return self.name
 

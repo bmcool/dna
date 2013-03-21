@@ -277,6 +277,7 @@ INSTALLED_APPS = (
     # "mezzanine.twitter",
     # "mezzanine.mobile",
     "jsonify",
+    "haystack",
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -352,6 +353,19 @@ AUTH_PROFILE_MODULE = None
 ACCOUNTS_VERIFICATION_REQUIRED = True
 
 ACCOUNTS_PROFILE_VIEWS_ENABLED = False
+
+#####################
+# HAYSTACK SETTINGS #
+#####################
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'TIMEOUT': 60 * 60,
+        'INDEX_NAME': APP_NAME,
+    },
+}
 
 ####################
 # DYNAMIC SETTINGS #
