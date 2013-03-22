@@ -11,6 +11,8 @@ admin.autodiscover()
 urlpatterns = patterns("",
     ("^admin/", include(admin.site.urls)),
     
+    ("^dna/", include("dna.urls")),
+    
     url("^$", direct_to_template, {"template": "index.html"}, name="home"),
     
     ("^", include("mezzanine.urls")),
